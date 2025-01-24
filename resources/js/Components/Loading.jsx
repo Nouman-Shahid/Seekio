@@ -85,7 +85,7 @@ const Loading = () => {
                     <img src={logo} className="h-12" />
                     <header class="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
                         <div class="w-full">
-                            <h1 class="text-4xl lg:text-6xl font-bold">
+                            <h1 class="text-4xl lg:text-6xl font-bold text-gray-600">
                                 {quote.text}
                             </h1>
                             <div class="w-20 h-2 bg-green-700 my-4"></div>
@@ -96,7 +96,7 @@ const Loading = () => {
             </div>
             <img
                 src={loadingpic}
-                class="w-full h-48 object-cover sm:h-screen sm:w-4/12"
+                class="w-full h-48 object-cover sm:h-screen sm:w-4/12 opacity-85"
             />
         </div>
     );
