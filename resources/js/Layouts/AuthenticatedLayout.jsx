@@ -8,53 +8,70 @@ import logo from "../images/logo.png";
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
-
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className=" flex p-2 px-5 justify-between items-center bg-white shadow-lg">
+            <nav className="flex p-2 px-10 justify-between items-center bg-white shadow-lg">
                 <img src={logo} className="h-12" />
-                <div className="flex space-x-5 ">
+                <div className="flex space-x-5">
                     <NavLink
-                        href={route("dashboard")}
-                        active={route().current("dashboard")}
+                        href={route("home")}
+                        active={route().current("home")}
                     >
                         Home
                     </NavLink>
-                    <NavLink>Explore</NavLink> <NavLink>About</NavLink>
+                    <NavLink>Explore</NavLink>
+                    <NavLink>About</NavLink>
                     <NavLink>FAQ</NavLink>
                 </div>
 
                 <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                    <div className="relative ms-3">
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <span className="inline-flex">
-                                    <button
-                                        type="button"
-                                        className="inline-flex items-center text-white border border-transparent bg-blue-900 text-xl  rounded-full p-3 font-medium leading-4 transition duration-150 ease-in-out"
-                                    >
-                                        {user.name.charAt(0)}
-                                    </button>
-                                </span>
-                            </Dropdown.Trigger>
+                    {user ? (
+                        <div className="relative ms-3">
+                            <Dropdown>
+                                <Dropdown.Trigger>
+                                    <span className="inline-flex">
+                                        <button
+                                            type="button"
+                                            className="inline-flex items-center text-white border border-transparent bg-blue-900 text-xl rounded-full p-3 font-medium leading-4 transition duration-150 ease-in-out"
+                                        >
+                                            {user.name.charAt(0)}
+                                        </button>
+                                    </span>
+                                </Dropdown.Trigger>
 
-                            <Dropdown.Content>
-                                <Dropdown.Link href={route("profile.edit")}>
-                                    Profile
-                                </Dropdown.Link>
-                                <Dropdown.Link
-                                    href={route("logout")}
-                                    method="post"
-                                    as="button"
-                                >
-                                    Log Out
-                                </Dropdown.Link>
-                            </Dropdown.Content>
-                        </Dropdown>
-                    </div>
+                                <Dropdown.Content>
+                                    <Dropdown.Link href={route("profile.edit")}>
+                                        Profile
+                                    </Dropdown.Link>
+                                    <Dropdown.Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
+                                    >
+                                        Log Out
+                                    </Dropdown.Link>
+                                </Dropdown.Content>
+                            </Dropdown>
+                        </div>
+                    ) : (
+                        <div className="flex space-x-4">
+                            <Link
+                                href={route("login")}
+                                className="py-2 px-3 bg-blue-600 active:bg-blue-700 text-white font-bold rounded-md"
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                href={route("register")}
+                                className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    )}
                 </div>
 
                 <div className="-me-2 flex items-center sm:hidden">
@@ -114,26 +131,43 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
+                        {user && (
+                            <div className="px-4">
+                                <div className="text-base font-medium text-gray-800">
+                                    {user.name}
+                                </div>
+                                <div className="text-sm font-medium text-gray-500">
+                                    {user.email}
+                                </div>
                             </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
+                        )}
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route("logout")}
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
+                            {user ? (
+                                <>
+                                    <ResponsiveNavLink
+                                        href={route("profile.edit")}
+                                    >
+                                        Profile
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink
+                                        method="post"
+                                        href={route("logout")}
+                                        as="button"
+                                    >
+                                        Log Out
+                                    </ResponsiveNavLink>
+                                </>
+                            ) : (
+                                <>
+                                    <ResponsiveNavLink href={route("login")}>
+                                        Login
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink href={route("register")}>
+                                        Register
+                                    </ResponsiveNavLink>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

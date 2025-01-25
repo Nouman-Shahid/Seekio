@@ -40,9 +40,9 @@ class AuthenticatedSessionController extends Controller
             if ($user->preference == NULL) {
                 return redirect()->route('preferences');
             }
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         } elseif ($user->role == 'teacher') {
-            return redirect()->intended(route('teacherdashboard'));
+            return redirect()->intended(route('home'));
         } elseif ($user->role == 'admin') {
             return redirect()->intended(route('admindashboard'));
         }

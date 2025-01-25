@@ -31,12 +31,12 @@ const Teacher = () => {
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
-            <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="flex justify-center w-full items-center min-h-screen bg-gray-100">
                 <form
                     onSubmit={submit}
                     className="w-full sm:w-8/12 md:w-6/12 lg:w-4/12 p-8 mx-64 bg-white rounded-lg shadow-lg"
                 >
-                    <h2 className="text-3xl font-semibold text-center text-indigo-600 mb-8">
+                    <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
                         Create a New Course
                     </h2>
                     <div>
@@ -163,9 +163,12 @@ const Teacher = () => {
                         />
                     </div>
                     <div className="mt-6 flex justify-center">
-                        <PrimaryButton className="w-full" disabled={processing}>
-                            {processing ? "Submitting..." : "Submit"}
-                        </PrimaryButton>
+                        <button
+                            type="submit"
+                            className="w-full text-center bg-blue-600 p-2 rounded-md text-white font-bold active:to-blue-700"
+                        >
+                            Submit
+                        </button>
                     </div>
                 </form>
                 <img
