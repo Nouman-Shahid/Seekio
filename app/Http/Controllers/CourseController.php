@@ -1,5 +1,4 @@
 <?php
-// CourseController.php
 
 namespace App\Http\Controllers;
 
@@ -7,6 +6,7 @@ use App\Models\Course;
 use App\Services\WebPurifyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CourseController extends Controller
 {
@@ -19,6 +19,7 @@ class CourseController extends Controller
 
     public function submitCourse(Request $request)
     {
+        // Validate the request data
         $request->validate([
             'course_title' => 'required|string|max:255',
             'course_desc' => 'required|string|max:255',
@@ -27,24 +28,19 @@ class CourseController extends Controller
             'course_level' => 'required|string',
         ]);
 
-        // Get course description to moderate
-        $courseContent = $request->input('course_desc');
+        $courseContent = $request->input('course_title') . ' ' . $request->input('course_desc');
 
-        // Use WebPurifyService to check for profanity
         $moderationResult = $this->webPurifyService->moderateText($courseContent);
 
-        // If the content contains profanity, reject it
         if ($moderationResult['status'] === 'contains_profanity') {
             return response()->json([
-                'error' => 'Content contains inappropriate language.',
-                'terms' => $moderationResult['terms']
-            ], 400);
+                'message' => 'Content contains inappropriate language'
+            ]);
         }
+
 
         $user = Auth::user();
 
-
-        // If content is clean, store the course
         $course = Course::create([
             'course_teacher_id' => $user->id,
             'course_title' => $request->course_title,
@@ -54,6 +50,6 @@ class CourseController extends Controller
             'course_level' => $request->course_level,
         ]);
 
-        return response()->json(['message' => 'Course submitted successfully!']);
+        return Inertia::render('Teacher', ['message' => "Course Submitted Successfully."]);
     }
 }

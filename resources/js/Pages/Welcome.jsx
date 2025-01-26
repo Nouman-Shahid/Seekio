@@ -1,10 +1,11 @@
 import { Head, Link } from "@inertiajs/react";
 import hero from "../images/assets/hero.png";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Navbar from "@/Components/Navbar";
 
 export default function Welcome({ auth }) {
     return (
-        <AuthenticatedLayout>
+        <>
+            <Navbar auth={auth} />
             <Head title="Welcome" />
 
             <div className="flex justify-between p-16 items-center">
@@ -24,14 +25,14 @@ export default function Welcome({ auth }) {
                         >
                             View Course
                         </Link>
-                        {auth.user?.role === "student" ? (
+                        {auth.user.role === "student" ? (
                             <Link
                                 // href={route("enrollNow")}
                                 className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
                             >
                                 Enroll Now
                             </Link>
-                        ) : auth.user?.role === "teacher" ? (
+                        ) : auth.user.role === "teacher" ? (
                             <Link
                                 href={route("teacherdashboard")}
                                 className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
@@ -48,6 +49,6 @@ export default function Welcome({ auth }) {
                     className="w-4/12 h-96 opacity-90 rounded-xl"
                 />
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 }

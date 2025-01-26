@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Navbar from "@/Components/Navbar";
 import loadingpic from "../images/assets/loading.png";
 import { Head, useForm } from "@inertiajs/react";
 
@@ -39,7 +39,7 @@ const courses = [
     },
 ];
 
-export default function Preferences() {
+export default function Preferences({ auth }) {
     const { data, setData, post, errors } = useForm({
         course: null,
     });
@@ -48,14 +48,14 @@ export default function Preferences() {
         setData("course", e.target.value);
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         post("/set_preferences");
     };
 
     return (
-        <AuthenticatedLayout>
+        <>
+            <Navbar auth={auth} />
             <Head title="Preference" />
 
             <form onSubmit={handleSubmit} className="py-2 h-auto flex">
@@ -109,6 +109,6 @@ export default function Preferences() {
                     alt="loading"
                 />
             </form>
-        </AuthenticatedLayout>
+        </>
     );
 }

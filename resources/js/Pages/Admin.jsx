@@ -1,13 +1,14 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import Navbar from "@/Components/Navbar";
 
-const Admin = () => {
+const Admin = ({ auth }) => {
     return (
-        <AuthenticatedLayout>
+        <>
+            <Navbar auth={auth} />
             <Head title="Dashboard" />
             <div>Admin</div>
-        </AuthenticatedLayout>
+        </>
     );
 };
 

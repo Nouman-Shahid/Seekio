@@ -1,25 +1,33 @@
 <?php
 
+// app/Providers/AppServiceProvider.php
+
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap any application services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        Vite::prefetch(concurrency: 3);
+        // Share authenticated user data globally to all views
+        View::share('auth', Auth::user());
     }
 }

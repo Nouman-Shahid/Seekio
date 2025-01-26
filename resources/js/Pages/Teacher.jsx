@@ -1,13 +1,13 @@
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import loadingpic from "../images/assets/loading.png";
 import { Head, Link, useForm } from "@inertiajs/react";
+import Navbar from "@/Components/Navbar";
 
-const Teacher = () => {
+const Teacher = ({ auth, message }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         course_title: "",
         course_desc: "",
@@ -29,7 +29,8 @@ const Teacher = () => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <>
+            <Navbar auth={auth} />
             <Head title="Dashboard" />
             <div className="flex justify-center w-full items-center min-h-screen bg-gray-100">
                 <form
@@ -39,6 +40,13 @@ const Teacher = () => {
                     <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
                         Create a New Course
                     </h2>
+
+                    {message && (
+                        <div className="bg-red-100 text-red-800 font-bold rounded-lg p-1 border-red-500 text-center my-4">
+                            {message}
+                        </div>
+                    )}
+
                     <div>
                         <InputLabel
                             htmlFor="course_title"
@@ -60,6 +68,7 @@ const Teacher = () => {
                             className="mt-2"
                         />
                     </div>
+
                     <div className="flex justify-between gap-4 mt-6">
                         <div className="w-full">
                             <InputLabel
@@ -115,6 +124,7 @@ const Teacher = () => {
                             />
                         </div>
                     </div>
+
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="course_desc"
@@ -124,7 +134,7 @@ const Teacher = () => {
                             id="course_desc"
                             name="course_desc"
                             value={data.course_desc}
-                            className="w-full min-h-36 max-h-36  border border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full min-h-36 max-h-36 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             onChange={(e) =>
                                 setData("course_desc", e.target.value)
                             }
@@ -135,6 +145,7 @@ const Teacher = () => {
                             className="mt-2"
                         />
                     </div>
+
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="course_level"
@@ -162,6 +173,7 @@ const Teacher = () => {
                             className="mt-2"
                         />
                     </div>
+
                     <div className="mt-6 flex justify-center">
                         <button
                             type="submit"
@@ -171,12 +183,13 @@ const Teacher = () => {
                         </button>
                     </div>
                 </form>
+
                 <img
                     src={loadingpic}
-                    class="w-full h-48 object-cover sm:h-screen sm:w-4/12 opacity-85"
+                    className="w-full h-48 object-cover sm:h-screen sm:w-4/12 opacity-85"
                 />
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 };
 
