@@ -27,6 +27,7 @@ createInertiaApp({
                 const handleFinish = () => setIsLoading(false);
 
                 Inertia.on("start", handleStart);
+                
                 Inertia.on("finish", handleFinish);
 
                 return () => {
