@@ -25,21 +25,21 @@ export default function Welcome({ auth }) {
                         >
                             View Course
                         </Link>
-                        {auth.user.role === "student" ? (
+                        {/* {auth.auth.role === "student" ? (
                             <Link
                                 // href={route("enrollNow")}
                                 className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
                             >
                                 Enroll Now
                             </Link>
-                        ) : auth.user.role === "teacher" ? (
+                        ) : auth.auth.role === "teacher" ? (
                             <Link
                                 href={route("teacherdashboard")}
                                 className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
                             >
                                 Make Course
                             </Link>
-                        ) : null}
+                        ) : null} */}
                     </div>
                 </div>
 

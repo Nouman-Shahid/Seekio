@@ -33,7 +33,6 @@ const Navbar = ({ auth }) => {
                                         className="inline-flex items-center text-white border border-transparent bg-blue-900 text-xl rounded-full p-3 font-medium leading-4 transition duration-150 ease-in-out"
                                     >
                                         {auth.user.name.charAt(0)}{" "}
-                                        {/* Access the user's name */}
                                     </button>
                                 </span>
                             </Dropdown.Trigger>
