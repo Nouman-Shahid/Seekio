@@ -10,6 +10,14 @@ use Inertia\Inertia;
 
 class CourseController extends Controller
 {
+    public function getAllCourse()
+    {
+        $courses = Course::all();
+
+        return Inertia::render('Welcome', [
+            'data' => $courses,
+        ]);
+    }
     protected $webPurifyService;
 
     public function __construct(WebPurifyService $webPurifyService)

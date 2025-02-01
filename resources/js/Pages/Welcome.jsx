@@ -1,8 +1,9 @@
 import { Head, Link } from "@inertiajs/react";
 import hero from "../images/assets/hero.png";
 import Navbar from "@/Components/Navbar";
+import Card from "@/Components/Card";
 
-export default function Welcome({ auth }) {
+export default function Welcome({ auth, data }) {
     return (
         <>
             <Navbar auth={auth} />
@@ -49,6 +50,13 @@ export default function Welcome({ auth }) {
                     className="w-4/12 h-96 opacity-90 rounded-xl"
                 />
             </div>
+
+            <div className="flex px-16">
+                <p className="text-4xl font-extrabold text-gray-600 font-sans">
+                    Popular Courses
+                </p>
+            </div>
+            <Card data={data} />
         </>
     );
 }

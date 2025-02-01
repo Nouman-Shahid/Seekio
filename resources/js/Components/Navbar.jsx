@@ -53,18 +53,18 @@ const Navbar = ({ auth }) => {
                     </div>
                 ) : (
                     <div className="flex space-x-4">
-                        <Link
+                        <NavLink
                             href={route("login")}
                             className="py-2 px-3 bg-blue-600 active:bg-blue-700 text-white font-bold rounded-md"
                         >
                             Login
-                        </Link>
-                        <Link
+                        </NavLink>
+                        <NavLink
                             href={route("register")}
                             className="py-2 px-3 bg-green-600 active:bg-green-700 text-white font-bold rounded-md"
                         >
                             Register
-                        </Link>
+                        </NavLink>
                     </div>
                 )}
             </div>
