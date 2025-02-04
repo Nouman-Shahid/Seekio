@@ -27,7 +27,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    
+     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
@@ -37,7 +38,7 @@ class AuthenticatedSessionController extends Controller
 
         // Redirect based on user role
         if ($user->role == 'student') {
-            if ($user->preference == NULL) {
+            if ($user->preference === NULL) {
                 return redirect()->route('preferences');
             }
             return redirect()->route('home');
